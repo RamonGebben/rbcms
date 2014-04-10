@@ -1,0 +1,20 @@
+
+
+<div class="container">
+    <h1>Log in</h1>
+    
+    <%= form_tag sessions_path do %>
+    <div class="control-group">
+        <%= label_tag :email, nil, :class => 'control-label' %>
+        <div class="controls">
+            <%= text_field_tag :email, nil, :class => 'text-field' %>
+    </div>
+    
+    <div class="control-group">
+        <%= label_tag :password, nil, :class => 'control-label' %>
+        <div class="controls">
+            <%= password_field_tag :password, nil, :class => 'text-field' %>
+    </div>
+      <%= submit_tag "Login", :class => "btn btn-primary" %>
+    <% end %>
+</div>
