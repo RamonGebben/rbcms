@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Post:</strong>
+  <%= @pageview.post_id %>
+</p>
+
+<p>
+  <strong>User ip:</strong>
+  <%= @pageview.user_ip %>
+</p>
+
+<%= link_to 'Edit', edit_pageview_path(@pageview) %> |
+<%= link_to 'Back', pageviews_path %>

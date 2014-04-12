@@ -1,14 +1,14 @@
 class NewsletterMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "ragenetweb@gmail.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
   #   en.newsletter_mailer.weekly.subject
   #
-  def weekly
+  def weekly(email)
     @greeting = "Hi"
 
-    mail to: "to@example.org"
+    mail to: email, subject: "Newsletter"
   end
 end

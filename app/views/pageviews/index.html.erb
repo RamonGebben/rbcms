@@ -1,0 +1,39 @@
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Views', 'Expenses'],
+          <%= Pageview.years.to_json %>
+        ]);
+
+        var options = {
+          title: 'Page Views',
+          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        
+        
+        var years = <%= Pageview.years.to_json %>;
+        var weeks = <%= Pageview.weeks.to_json %>;
+        var days = <%= Pageview.days.to_json %>;
+        console.log( days[0] );
+        
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+      
+      
+    </script>
+<h1>Statistics</h1>
+
+<script>
+  
+</script>
+<div class="container">
+    <div id="chart_div" style="width: 600px; height: 500px;"></div>
+</div>
+
+

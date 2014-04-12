@@ -51,3 +51,9 @@ gem 'bcrypt-ruby', '~> 3.1.2', :require => "bcrypt"
 
 # Markdown formating
 gem 'rdiscount'
+
+# Puts css inline for Emails
+gem 'roadie'
+
+# Upload pictures
+gem 'paperclip', "~> 4.1"
