@@ -3,27 +3,51 @@
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Views', 'Expenses'],
-          <%= Pageview.years.to_json %>
-        ]);
-
+          
+        // Data
+        var hours = google.visualization.arrayToDataTable(
+          <%= raw Pageview.hours.to_json %>
+        );
+        var days = google.visualization.arrayToDataTable(
+          <%= raw Pageview.days.to_json %>
+        );
+        var weeks = google.visualization.arrayToDataTable(
+          <%= raw Pageview.weeks.to_json %>
+        );
+        var quarters = google.visualization.arrayToDataTable(
+          <%= raw Pageview.quarters.to_json %>
+        );
+        var years = google.visualization.arrayToDataTable(
+          <%= raw Pageview.years.to_json %>
+        );
+        
+        //Options
         var options = {
-          title: 'Page Views',
-          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
-          vAxis: {minValue: 0}
+          legend: 'none',
+          vAxis: {minValue: 0},
+          hAxis: {direction: -1},
+          orientation: "horizontal",
+          curveType:'function',
+          lineWidth: 2,
+          intervals: { 'style':'line' }
         };
-
         
+        //Targets
+        var chartHours = new google.visualization.LineChart(document.getElementById('chart_div_hours'));
+        var chartDays = new google.visualization.BarChart(document.getElementById('chart_div_days'));
+        var chartWeeks = new google.visualization.LineChart(document.getElementById('chart_div_weeks'));
+        var chartQuarters = new google.visualization.AreaChart(document.getElementById('chart_div_quarters'));
+        var chartYears = new google.visualization.AreaChart(document.getElementById('chart_div_years'));
         
-        var years = <%= Pageview.years.to_json %>;
-        var weeks = <%= Pageview.weeks.to_json %>;
-        var days = <%= Pageview.days.to_json %>;
-        console.log( days[0] );
-        
-        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
+        //Fire
+        chartHours.draw(hours, options);
+        chartDays.draw(days, options);
+        chartWeeks.draw(weeks, options);
+        chartQuarters.draw(quarters, options);
+        chartYears.draw(years, options);
       }
+
+
       
       
     </script>
@@ -32,8 +56,15 @@
 <script>
   
 </script>
-<div class="container">
-    <div id="chart_div" style="width: 600px; height: 500px;"></div>
-</div>
+    <h2>Past 24 hours</h2>
+    <div id="chart_div_hours" style="width: 100%; height: 500px; display: inline-block;"></div>
+    <h2>Past 14 days</h2>
+    <div id="chart_div_days" style="width: 100%; height: 500px; display: inline-block;"></div>
+    <h2>Past 6 months</h2>
+    <div id="chart_div_weeks" style="width: 100%; height: 500px; display: inline-block;"></div>
+    <h2>Past 3 years in quarters</h2>
+    <div id="chart_div_quarters" style="width: 100%; height: 500px; display: inline-block;"></div>
+    <h2>Past 3 years</h2>
+    <div id="chart_div_years" style="width: 100%; height: 500px; display: inline-block;"></div>
 
 
