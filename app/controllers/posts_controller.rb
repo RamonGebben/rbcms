@@ -2,10 +2,19 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_filter :logged_in?
 
+  def page    
+     @post = Post.smart_page( params[:name] )        
+     render :edit
+  end
+
+  def pages
+    @posts = Post.where( "static IS NOT NULL" ).order("sticky DESC, title ASC")
+  end
+
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.where( "static IS NULL" ).order("created_at DESC")
   end
 
   # GET /posts/1
@@ -70,6 +79,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :lead, :content, :image, :image_file_name)
+      params.require(:post).permit(:title, :lead, :content, :image, :image_file_name, :sticky)
     end
 end

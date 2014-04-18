@@ -22,49 +22,78 @@
         );
         
         //Options
-        var options = {
-          legend: 'none',
+        var options1 = {
           vAxis: {minValue: 0},
-          hAxis: {direction: -1},
+          hAxis: {direction: -1,slantedText: true, slantedTextAngle:1},
           orientation: "horizontal",
           curveType:'function',
           lineWidth: 2,
-          intervals: { 'style':'line' }
+          intervals: { 'style':'line' },
+          fontSize: 10 
         };
+        var options2 = {
+          vAxis: {minValue: 0},
+          hAxis: {direction: -1,slantedText: true, slantedTextAngle:45},
+          orientation: "horizontal",
+          curveType:'function',
+          lineWidth: 2,
+          intervals: { 'style':'line' },
+          fontSize: 10 
+        };
+        var options3 = {
+          vAxis: {minValue: 0},
+          hAxis: {direction: -1,slantedText: true, slantedTextAngle:90},
+          orientation: "horizontal",
+          curveType:'function',
+          lineWidth: 2,
+          intervals: { 'style':'line' },
+          fontSize: 10 
+        };
+        
+        
         
         //Targets
         var chartHours = new google.visualization.LineChart(document.getElementById('chart_div_hours'));
-        var chartDays = new google.visualization.BarChart(document.getElementById('chart_div_days'));
+        var chartDays = new google.visualization.LineChart(document.getElementById('chart_div_days'));
+        var chartQuarters = new google.visualization.BarChart(document.getElementById('chart_div_quarters'));
+        var chartYears = new google.visualization.BarChart(document.getElementById('chart_div_years'));
         var chartWeeks = new google.visualization.LineChart(document.getElementById('chart_div_weeks'));
-        var chartQuarters = new google.visualization.AreaChart(document.getElementById('chart_div_quarters'));
-        var chartYears = new google.visualization.AreaChart(document.getElementById('chart_div_years'));
+
         
         //Fire
-        chartHours.draw(hours, options);
-        chartDays.draw(days, options);
-        chartWeeks.draw(weeks, options);
-        chartQuarters.draw(quarters, options);
-        chartYears.draw(years, options);
+        chartHours.draw(hours, options3);
+        chartDays.draw(days, options2);
+        chartWeeks.draw(weeks, options1);
+        chartQuarters.draw(quarters, options1);
+        chartYears.draw(years, options1);
       }
 
 
       
       
     </script>
+
+    
 <h1>Statistics</h1>
 
 <script>
   
 </script>
-    <h2>Past 24 hours</h2>
-    <div id="chart_div_hours" style="width: 100%; height: 500px; display: inline-block;"></div>
-    <h2>Past 14 days</h2>
-    <div id="chart_div_days" style="width: 100%; height: 500px; display: inline-block;"></div>
-    <h2>Past 6 months</h2>
-    <div id="chart_div_weeks" style="width: 100%; height: 500px; display: inline-block;"></div>
-    <h2>Past 3 years in quarters</h2>
-    <div id="chart_div_quarters" style="width: 100%; height: 500px; display: inline-block;"></div>
-    <h2>Past 3 years</h2>
-    <div id="chart_div_years" style="width: 100%; height: 500px; display: inline-block;"></div>
-
+<div id="charts">
+    <h2><a name="24hours">Last day</a></h2>
+    <p>Pageviews per hour</p>
+    <div id="chart_div_hours" style="width: 100%; height: 200px; display: inline-block;"></div>
+    <h2><a name="14days">Past week</a></h2>
+    <p>Pageviews per day</p>
+    <div id="chart_div_days" style="width: 100%; height: 200px; display: inline-block;"></div>
+    <h2><a name="6months">Past quarter</a></h2>
+    <p>Pageviews per week</p>
+    <div id="chart_div_weeks" style="width: 100%; height: 200px; display: inline-block;"></div>
+    <h2><a name="3years">Past year</a></h2>
+    <p>Pageviews per quarter</p>
+    <div id="chart_div_quarters" style="width: 100%; height: 200px; display: inline-block;"></div>
+    <h2><a name="10years">Past 5 years</a></h2>
+    <p>Pageviews per year</p>
+    <div id="chart_div_years" style="width: 100%; height: 200px; display: inline-block;"></div>
+</div>
 

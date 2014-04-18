@@ -52,7 +52,7 @@
 
       <!-- Three columns of text below the carousel -->
       <div class="row">
-      <% @recent.each do |p| %>
+      <% @posts.each do |p| %>
         <div class="col-lg-4" style='vertical-align: bottom; display: inline-block'>
             <%= image_tag p.smart_image, :class => 'img-circle', :style => "width: 200px; height: 200px" %>
             <h2><%= p.title %></h2>
@@ -65,12 +65,11 @@
 
 
       <!-- START THE FEATURETTES -->
-    <hr class="featurette-divider">
-    <h1 style="padding-bottom: 10px;"><a name="popular">Most popular posts</a></h1>        
+
       <% flip = false %>
       <% @popular.each do |p| %>
-      
-        
+  
+        <hr class="featurette-divider">
         <% flip = !flip %>
         
         <div class="row featurette">
@@ -82,7 +81,7 @@
           <div class="col-md-7">
             <h2 class="featurette-heading"><%= p.title.split('.').first  %> <span class="text-muted"><%= p.title.split('.').from(1).join('.') %></span></h2>
             <p class="lead"><%= p.lead %></p>
-            <p><a class="btn btn-primary" name="" href="/post/<%= p.id %>" role="button">Read On &raquo;</a></p>
+            <p><a class="btn btn-primary" href="/post/<%= p.id %>" role="button">Read On &raquo;</a></p>
           </div>
           <% unless flip then %>
             <div class="col-md-5">
@@ -90,35 +89,16 @@
             </div>
           <% end %>
         </div>
-        <hr class="featurette-divider">
+
       <% end %>
 
       <!-- /END THE FEATURETTES -->
-    <h1 style="padding-bottom: 10px;"><a name="archive">Archive</a></h1>        
-    
-    <div class="table-responsive">
-          <table class="table table-striped">
-            <tr>
-                <th><h4>Title</h4></th>
-                <th><h4>Lead</h4></th>
-            </tr>
-            <% @posts.each do |p| %>
-            <tr>
-                <th style='width: 40%'>
-                  <h4><%= link_to p.title, "/post/#{p.id}" %></h4>
-                  <small><%= time_ago_in_words( p.created_at ) %> ago</small>
-                </th>
-                <td><h4><%= p.lead %></h4></td>
-            </tr>
-            <% end %>
-          </table>
-    </div>
 
-    <hr class="featurette-divider">
+
       <!-- FOOTER -->
       <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2014 Company, Inc.</p>
+        <p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
       </footer>
 
     </div><!-- /.container -->

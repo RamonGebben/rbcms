@@ -1,0 +1,29 @@
+    <div id="myCarousel" class="carousel" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="item active">
+                <%= image_tag @post.smart_image %>
+                <div class="container">
+                    <div class="carousel-caption">
+                    <h1><%= @post.title %></h1>
+                    <p><%= @post.lead %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<div class="container post">
+    <div class="row">
+        <div class="col-lg-12">
+            <%= raw RDiscount.new(@post.content, :smart, :footnotes ).to_html %>
+        </div>
+    </div>
+</div>
+<br>
+      <!-- FOOTER -->
+<div class="container">
+    <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2014 Company, Inc. </p>
+      </footer>
+</div>

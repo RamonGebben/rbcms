@@ -1,0 +1,43 @@
+<%- model_class = Post -%>
+  <h1>Pages <small class='muted'>from A-Z</small></h1>
+  <p class='muted'>Every page is available at its own pretty url. Sticky pages will be top-level menu-items, while other pages will be collapsed. </p>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>URL</th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr class="<%= post.sticky ? "info" : "" %>">
+        <td><%= link_to "/" + post.static, "/" + post.static, :style => "width: 100%; display: block;" %></td>
+        <td><%= link_to raw('<span class="entypo-pencil"></span> ') + post.title, "/" + post.static + "/edit", :class => "", :style => "width: 100%; display: block;" %></td>
+        <td><%= time_ago_in_words post.created_at %> ago</td>
+        <td style='text-align: right'>
+         <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      post_path(post),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div style="text-align: left; padding-left: -10px">
+    <input style='min-width: 400px; position: relative; top: 5px;' type='text' id="new_page_field" placeholder="provide desired url, for example: '/about-me'">
+    <a id='new_page' class='btn btn-primary'>+ Page</a>
+    <script>
+      $('#new_page').click( function(){
+         window.location.href = "/" + $('#new_page_field').val().replace('/','') + "/edit"
+      })
+    </script>
+</div> 
+
+
+
+

@@ -1,12 +1,15 @@
 <%= form_for @post, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="control-group">
     <%= f.text_field :title, :class => 'text_field', :placeholder => 'Title of post' %>
-    <%= f.file_field :image, :class => 'btn' %>
+    <%= f.file_field :image %>
   </div>
   <div class="control-group">
     <%= f.text_area :lead, :class => 'text_field', :placeholder => 'Lead of post', :style => "width: 99%;" %>
   </div>
   <div class="control-group">
+      <span class="input-group-addon">
+          <%= f.check_box :sticky %>
+      </span>
     <div class="controls ace">
         <%= f.text_area :content, :id => "content_textarea" %>
         <div id='content_ace'></div>

@@ -1,23 +1,20 @@
 <%- model_class = Post -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-</div>
-<table class="table table-striped">
+<h1>Posts <small class='muted'>most recent first</small></h1>
+<p class='muted'>On the homepage, both popular and recent posts are shown. Sticky posts will be displayed in the carrousal.</p>
+<table class="table table-striped table-hover">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <% @posts.each do |post| %>
-      <tr>
-        <td><%= link_to post.title, post_path(post) %></td>
+      <tr class="<%= post.sticky ? "info" : "" %>">
+        <td><%= link_to " " + post.title, edit_post_path(post), :style => "width: 100%; display: block;", :class => "entypo-pencil" %></td>
         <td><%= time_ago_in_words post.created_at %> ago</td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_post_path(post), :class => 'btn btn-mini' %>
+        <td style='text-align: right'>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       post_path(post),
                       :method => :delete,
@@ -29,6 +26,7 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
+<%= link_to '+ Post',
             new_post_path,
             :class => 'btn btn-primary' %>
+
